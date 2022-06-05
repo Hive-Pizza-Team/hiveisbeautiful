@@ -81,7 +81,7 @@ function getLabel(operation) {
       var app = json.app
       app = app.split('/')[0]
       
-      if (app == 'leofinance') {
+      if (app == 'leofinance' || app == 'LeoFinance') {
         label = 'Leo'
       } else if (app == 'peakd') {
         label = 'PeakD'
@@ -167,21 +167,21 @@ function getLabel(operation) {
       } else if (id == 'leoinfra') {
         return 'Leo'
       } else if (id.includes('qwoyn_')) {
-        return 'Hashkings'
+        return 'HashKings'
       } else if (id == 'dope') {
         return 'Dope'
       } else if (id == 'commentcoin') {
         return 'commentcoin'
       } else if (id == 'podping') {
         return 'podping'
-      } else if (id == 'ssc-testnet-puzzlr' || id == 'ssc-testnet-reaz') {
+      } else if (id.includes('ssc-testnet-')) {
         return 'H-E Testnet'
       } else if (id == 'dcrops') {
         return 'dCrops'
       } else if (id.includes('ecency_')) {
         return 'Ecency'
       } else if (id.includes('spkcc_')) {
-        return 'SpkNetwork'
+        return 'SpkCC'
       } else if (id.includes('duat_')) {
         return 'Ragnarok'
       } else if (id.includes('op_')) {
@@ -215,7 +215,7 @@ function getNodeColor(label) {
     return 'red'
   } else if (label == 'Other') {
     return 'gray'
-  } else if (label == 'Post' || label == 'PeakD') {
+  } else if (label == 'Post' || label == 'PeakD' || label == 'dCrops') {
     return 'lightgreen'
   } else if (label == 'Comment' || label == 'Hive.blog') {
     return 'yellow-orange'
@@ -225,7 +225,7 @@ function getNodeColor(label) {
     return 'lightgreen'
   } else if (label == 'PIZZA' || label == 'Leo' || label == 'Holybread' || label == 'podping') {
     return 'yellow'
-  } else if (label == 'Piggies' || label == '3Speak') {
+  } else if (label == 'Piggies' || label == '3Speak' || label == 'SpkCC' || label == 'Ragnarok') {
     return 'bluegreen'
   } else {
     return 'gray'
