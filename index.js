@@ -225,7 +225,7 @@ function getNodeColor(label) {
     return 'orange'
   } else if (label == 'CBM') {
     return 'lightgreen'
-  } else if (label == 'PIZZA' || label == 'Leo' || label == 'Holybread' || label == 'podping') {
+  } else if (label == 'PIZZA' || label == 'Leo' || label == 'Holybread' || label == 'podping' || label == 'WOO') {
     return 'yellow'
   } else if (label == 'Piggies' || label == '3Speak' || label == 'SpkCC' || label == 'Ragnarok') {
     return 'bluegreen'
