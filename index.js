@@ -79,6 +79,7 @@ function getLabel(operation) {
 
     if (json && json.app) {
       var app = json.app
+      console.log(json.app)
       app = app.split('/')[0]
       
       if (app == 'leofinance' || app == 'LeoFinance') {
@@ -91,12 +92,13 @@ function getLabel(operation) {
         label = 'Poshtoken'
       } else if (app == '3speak') {
         label = '3Speak'
+      } else if (app == 'leothreads') {
+        label = 'LeoThread'
       } else {
         label = app
+        label = label.charAt(0).toUpperCase() + label.slice(1);
       }
 
-
-      label = label.charAt(0).toUpperCase() + label.slice(1);
       console.log(label)
       return label
     } else {
@@ -225,7 +227,7 @@ function getNodeColor(label) {
     return 'orange'
   } else if (label == 'CBM') {
     return 'lightgreen'
-  } else if (label == 'PIZZA' || label == 'Leo' || label == 'Holybread' || label == 'podping' || label == 'WOO') {
+  } else if (label == 'PIZZA' || label == 'Leo' || label == 'LeoThread' || label == 'Holybread' || label == 'podping' || label == 'WOO') {
     return 'yellow'
   } else if (label == 'Piggies' || label == '3Speak' || label == 'SpkCC' || label == 'Ragnarok') {
     return 'bluegreen'
