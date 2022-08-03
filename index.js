@@ -95,7 +95,7 @@ function getLabel(operation) {
       } else if (app == 'leothreads') {
         label = 'LeoThread'
       } else {
-        label = app
+        label = app.substring(0,9)
         label = label.charAt(0).toUpperCase() + label.slice(1);
       }
 
@@ -117,13 +117,27 @@ function getLabel(operation) {
         return 'EpicDice'
       }
       
+      // Splinterlands related ops
       var app = json.app
       if (app && (app.includes('steemmonsters') || app.includes('splinterlands')) || id.includes('sm_') || id.includes('pm_')) {
         return 'SL'
-      } else if (id.includes('cbm_')){
+      } 
+
+      // Hive-Engine tokens
+      if (id.includes('ssc-mainnet') && json.contractPayload) {
+        if (json.contractPayload['symbol'] == 'PIZZA') {
+          return 'PIZZA' 
+        } else if (['WOO','WOOALPHA','WOOSATURN','WOORAVEN'].includes(json.contractPayload['symbol'])) {
+          return 'WOO'
+        } else if (['BUDS','BUDSX','EXP'].includes(json.contractPayload['symbol'])) {
+          return 'HashKings'
+        } else if (json.contractPayload['symbol'] == 'CROP') {
+          return 'dCrops'
+        }
+      }
+
+      if (id.includes('cbm_')){
         return 'CBM'
-      } else if (id.includes('ssc-mainnet') && json.contractPayload && json.contractPayload['symbol'] == 'PIZZA') {
-        return 'PIZZA'
       } else if (id.includes('ssc-mainnet') || id.includes('scot_')) {
         return 'H-E'
       } else if (id == 'pigs_expired/1' || id =='reject_order/1' || id == 'game_request/1' || id == 'pack_purchase/1' || id == 'confirm_order/1' || id == 'fulfill_pigs/1' || id == 'end_game/1' || id.includes('gmreq_') || id == 'start_game/1' || id =='game_rewards/1' || id == 'pig_upgrade/1' || id == 'fulfill_points/1') {
@@ -187,9 +201,11 @@ function getLabel(operation) {
       } else if (id.includes('duat_')) {
         return 'Ragnarok'
       } else if (id.includes('op_')) {
-        return 'OceanPlanet'
+        return 'OP' 
       } else if (id.includes('woo_')) {
         return 'WOO'
+      } else if (id.includes('archmage_')) {
+        return 'Mage'
       } else {
         return 'Other'
       }
@@ -205,25 +221,28 @@ function getLabel(operation) {
     label = operation[0].split('_')[0]
     // capitalize first letter
     label = label.charAt(0).toUpperCase() + label.slice(1);
+    label = label.substring(0,9)
     return label
   }
 }
 
 
+// Set node colors based on label strings
+
 function getNodeColor(label) {
   if (label == 'SL') {
     return 'green'
-  } else if (label == 'Up') {
+  } else if (label == 'Up' || label == 'STEMSocia' || label == 'Ecency') {
     return 'blue'
-  } else if (label == 'Downvote' || label == 'H-E') {
+  } else if (label == 'Downvote' || label == 'H-E' || label == 'Actifit') {
     return 'red'
   } else if (label == 'Other') {
     return 'gray'
-  } else if (label == 'Post' || label == 'PeakD' || label == 'dCrops') {
+  } else if (label == 'Post' || label == 'PeakD' || label == 'dCrops' || label == 'HashKings') {
     return 'lightgreen'
   } else if (label == 'Comment' || label == 'Hive.blog') {
     return 'yellow-orange'
-  } else if (label == 'Transfer') {
+  } else if (label == 'Transfer' || label == 'VIMM') {
     return 'orange'
   } else if (label == 'CBM') {
     return 'lightgreen'
