@@ -357,6 +357,7 @@ function getLatestBlocknum() {
     var blockNum = result.head_block_number
     document.querySelector('#blockNum').innerText = `${blockNum}`
     document.querySelector('#blockNum').data = `${blockNum}`
+
     runLoop()
   })
 
@@ -375,7 +376,7 @@ function runLoop () {
     }
 
     console.log(blockNum)
-
+    
     hive.api.getBlock(blockNum, function(err, result) {
       //console.log(err, result);
       //console.log(blockNum)
@@ -385,11 +386,15 @@ function runLoop () {
       }
 
       var block = result
-      console.log('Block Size',JSON.stringify(block).length)
       // check if the block looks okay
       if (!block || !block.transactions) {
         return
       }
+
+      // const blockSizeMax = 65536;  
+      // const blockSize = JSON.stringify(block).length
+      // const blockFullPct = parseInt(blockSize / blockSizeMax * 100)
+      // document.querySelector('#blockSize').innerText = `${blockSize.toLocaleString()} (${blockFullPct}% Full)`
 
       d3.select('svg#viz').selectAll('g').remove()
       var nodes = createNodes(block.transactions)
