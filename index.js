@@ -80,7 +80,14 @@ function getLabel(operation) {
     if (json && json.app) {
       var app = json.app
       console.log(json.app)
-      app = app.split('/')[0]
+
+      if (typeof app === 'string') {
+        app = app.split('/')[0]
+      } else if (app.name) {
+        app = app.name
+      } else {
+        app = 'Unrecognized'
+      }
       
       if (app == 'leofinance' || app == 'LeoFinance') {
         label = 'Leo'
@@ -206,6 +213,11 @@ function getLabel(operation) {
         return 'WOO'
       } else if (id.includes('archmage_')) {
         return 'Mage'
+      } else if (id.includes('gls-plat')) {
+        return 'GLS'
+      } else if (id.includes('sf_')) {
+        return 'Forge'
+      }
       } else {
         return 'Other'
       }
@@ -374,6 +386,7 @@ function runLoop () {
       }
 
       var block = result
+      console.log('Block Size',JSON.stringify(block).length)
       // check if the block looks okay
       if (!block || !block.transactions) {
         return
