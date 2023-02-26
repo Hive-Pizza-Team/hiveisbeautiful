@@ -391,10 +391,8 @@ function runLoop () {
         return
       }
 
-      // const blockSizeMax = 65536;  
-      // const blockSize = JSON.stringify(block).length
-      // const blockFullPct = parseInt(blockSize / blockSizeMax * 100)
-      // document.querySelector('#blockSize').innerText = `${blockSize.toLocaleString()} (${blockFullPct}% Full)`
+      const blockSize = block.transactions.length;
+      document.querySelector('#blockSize').innerText = `${blockSize.toLocaleString()} transactions`
 
       d3.select('svg#viz').selectAll('g').remove()
       var nodes = createNodes(block.transactions)
