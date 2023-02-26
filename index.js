@@ -217,6 +217,8 @@ function getLabel(operation) {
         return 'GLS'
       } else if (id.includes('sf_')) {
         return 'Forge'
+      } else if (id === 'rc') {
+        return 'RC'
       } else {
         return 'Other'
       }
