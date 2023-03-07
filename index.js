@@ -219,6 +219,8 @@ function getLabel(operation) {
         return 'Forge'
       } else if (id === 'rc') {
         return 'RC'
+      } else if (id.includes('terracore_')) {
+        return 'Terracore'
       } else {
         return 'Other'
       }
