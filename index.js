@@ -257,7 +257,7 @@ function getNodeColor(label) {
     return 'lightgreen'
   } else if (label == 'Comment' || label == 'Hive.blog') {
     return 'yellow-orange'
-  } else if (label == 'Transfer' || label == 'VIMM') {
+  } else if (label == 'Transfer' || label == 'VIMM' || label == 'Terracore') {
     return 'orange'
   } else if (label == 'CBM') {
     return 'lightgreen'
