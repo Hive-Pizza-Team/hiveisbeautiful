@@ -126,7 +126,12 @@ function getLabel(operation) {
       
       // Splinterlands related ops
       var app = json.app
-      if (app && (app.includes('steemmonsters') || app.includes('splinterlands')) || id.includes('sm_') || id.includes('pm_')) {
+      
+      if (typeof app === Object && Object.keys(app).includes('name')) {
+        app = app.name
+      }
+
+      if (app && typeof app === String && (app.includes('steemmonsters') || app.includes('splinterlands')) || id.includes('sm_') || id.includes('pm_')) {
         return 'SL'
       } 
 
