@@ -262,7 +262,7 @@ function getLabel(operation) {
       return "Forge";
     } else if (id === "rc") {
       return "RC";
-    } else if (id.startsWith("terracore_")) {
+    } else if (id.startsWith("terracore_") || id.startsWith("tm_")) {
       return "Terracore";
     } else if (id.startsWith("peakd_")) {
       return "PeakD";
