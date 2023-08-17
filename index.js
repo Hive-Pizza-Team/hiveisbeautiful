@@ -140,14 +140,14 @@ function getLabel(operation) {
       (app &&
         typeof app === String &&
         (app.includes("steemmonsters") || app.includes("splinterlands"))) ||
-      id.includes("sm_") ||
-      id.includes("pm_")
+      id.startsWith("sm_") ||
+      id.startsWith("pm_")
     ) {
       return "SL";
     }
 
     // Hive-Engine tokens
-    if (id.includes("ssc-mainnet") && json.contractPayload) {
+    if (id.startsWith("ssc-mainnet") && json.contractPayload) {
       if (json.contractPayload["symbol"] == "PIZZA") {
         return "PIZZA";
       } else if (
@@ -167,7 +167,7 @@ function getLabel(operation) {
 
     if (id.includes("cbm_")) {
       return "CBM";
-    } else if (id.includes("ssc-mainnet") || id.includes("scot_")) {
+    } else if (id.startsWith("ssc-mainnet") || id.startsWith("scot_")) {
       return "H-E";
     } else if (
       id == "pigs_expired/1" ||
@@ -177,16 +177,16 @@ function getLabel(operation) {
       id == "confirm_order/1" ||
       id == "fulfill_pigs/1" ||
       id == "end_game/1" ||
-      id.includes("gmreq_") ||
+      id.startsWith("gmreq_") ||
       id == "start_game/1" ||
       id == "game_rewards/1" ||
       id == "pig_upgrade/1" ||
       id == "fulfill_points/1"
     ) {
       return "Piggies";
-    } else if (id.includes("exode")) {
+    } else if (id.startsWith("exode")) {
       return "Exode";
-    } else if (id.includes("hb_")) {
+    } else if (id.startsWith("hb_")) {
       return "Holybread";
     } else if (id == "GameSeed") {
       return "KryptoG";
@@ -196,11 +196,11 @@ function getLabel(operation) {
       return "Follow";
     } else if (id == "reblog") {
       return "Reblog";
-    } else if (id.includes("dlux_")) {
+    } else if (id.startsWith("dlux_")) {
       return "Dlux";
     } else if (id == "community") {
       return "Community";
-    } else if (id.includes("esteem_")) {
+    } else if (id.startsWith("esteem_")) {
       return "Ecency";
     } else if (id == "rabona") {
       return "Rabona";
@@ -208,62 +208,66 @@ function getLabel(operation) {
       return "Kinoko";
     } else if (id == "actifit") {
       return "Actifit";
-    } else if (id.includes("dcity")) {
+    } else if (id.startsWith("dcity")) {
       return "dCity";
-    } else if (id.includes("lensy_")) {
+    } else if (id.startsWith("lensy_")) {
       return "Lensy";
     } else if (id == "beacon_custom_json") {
       return "PeakD";
-    } else if (id.includes("nftsr_")) {
+    } else if (id.startsWith("nftsr_")) {
       return "NFTSR";
-    } else if (id.includes("dominuus_")) {
+    } else if (id.startsWith("dominuus_")) {
       return "Dominuus";
     } else if (id == "nextcolony") {
       return "NextColony";
-    } else if (id == "drugwars" || id.includes("dw-")) {
+    } else if (id == "drugwars" || id.startsWith("dw-")) {
       return "DrugWars";
     } else if (id == "leoinfra") {
       return "Leo";
-    } else if (id.includes("qwoyn_")) {
+    } else if (id.startsWith("qwoyn_")) {
       return "HashKings";
     } else if (id == "dope") {
       return "Dope";
     } else if (id == "commentcoin") {
       return "commentcoin";
     } else if (
-      id.includes("pp_video") &&
+      id.startsWith("pp_video") &&
       Object.keys(json).includes("generator") &&
       json.generator.includes("Hive-Tube")
     ) {
       return "HiveTube";
-    } else if (id.includes("pp_")) {
+    } else if (id.startsWith("pp_")) {
       return "podping";
-    } else if (id.includes("ssc-testnet-")) {
+    } else if (id.startsWith("ssc-testnet-")) {
       return "H-E Testnet";
     } else if (id == "dcrops") {
       return "dCrops";
-    } else if (id.includes("ecency_")) {
+    } else if (id.startsWith("ecency_")) {
       return "Ecency";
-    } else if (id.includes("spkcc_")) {
+    } else if (id.startsWith("spkcc_")) {
       return "SpkCC";
-    } else if (id.includes("duat_")) {
+    } else if (id.startsWith("duat_")) {
       return "Ragnarok";
-    } else if (id.includes("op_")) {
+    } else if (id.startsWith("op_")) {
       return "OP";
-    } else if (id.includes("woo_")) {
+    } else if (id.startsWith("woo_")) {
       return "WOO";
     } else if (id.includes("archmage_")) {
       return "Mage";
-    } else if (id.includes("gls-plat")) {
+    } else if (id.startsWith("gls-")) {
       return "GLS";
-    } else if (id.includes("sf_")) {
+    } else if (id.startsWith("sf_")) {
       return "Forge";
     } else if (id === "rc") {
       return "RC";
-    } else if (id.includes("terracore_")) {
+    } else if (id.startsWith("terracore_")) {
       return "Terracore";
-    } else if (id.includes("peakd_")) {
+    } else if (id.startsWith("peakd_")) {
       return "PeakD";
+    } else if (id === "nftmart") {
+      return "NFTMart";
+    } else if (id.startsWith("mole-miner-")) {
+      return "MuTerra";
     } else {
       return "Other";
     }
