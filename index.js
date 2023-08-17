@@ -270,6 +270,10 @@ function getLabel(operation) {
       return "NFTMart";
     } else if (id.startsWith("mole-miner-")) {
       return "MuTerra";
+    } else if (id.startsWith("go_")) {
+      return "GolemO";
+    } else if (id.startsWith("3speak-")) {
+      return "3Speak";
     } else {
       return "Other";
     }
