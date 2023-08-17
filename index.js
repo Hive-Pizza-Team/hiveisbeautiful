@@ -264,6 +264,8 @@ function getLabel(operation) {
       return "RC";
     } else if (id.includes("terracore_")) {
       return "Terracore";
+    } else if (id.includes("peakd_")) {
+      return "PeakD";
     } else {
       return "Other";
     }
