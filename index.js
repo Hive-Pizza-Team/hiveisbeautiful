@@ -235,10 +235,8 @@ function getLabel(operation) {
       Object.keys(json).includes("generator") &&
       json.generator.includes("Hive-Tube")
     ) {
-      console.log(id, json);
       return "HiveTube";
     } else if (id.includes("pp_")) {
-      console.log(id, json);
       return "podping";
     } else if (id.includes("ssc-testnet-")) {
       return "H-E Testnet";
