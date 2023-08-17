@@ -141,7 +141,9 @@ function getLabel(operation) {
         typeof app === String &&
         (app.includes("steemmonsters") || app.includes("splinterlands"))) ||
       id.startsWith("sm_") ||
-      id.startsWith("pm_")
+      id.startsWith("pm_") || 
+      id.startsWith("sl-") || 
+      id.startsWith("dev-sm_")
     ) {
       return "SL";
     }
