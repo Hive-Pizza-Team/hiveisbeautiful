@@ -103,11 +103,11 @@ function getLabel(operation) {
       } else if (app == "hiveblog") {
         label = "Hive.blog";
       } else if (app.includes("Poshtoken")) {
-        label = "Poshtoken";
+        label = "Posh";
       } else if (app == "3speak") {
         label = "3Speak";
       } else if (app == "leothreads") {
-        label = "LeoThread";
+        label = "Leo";
       } else {
         label = app.substring(0, 9);
         label = label.charAt(0).toUpperCase() + label.slice(1);
@@ -274,7 +274,9 @@ function getLabel(operation) {
       return "GolemO";
     } else if (id.startsWith("3speak-")) {
       return "3Speak";
-    } else {
+    } else if (id.startsWith("leo_")) {
+      return "Leo";
+    }else {
       return "Other";
     }
   } else if (opname == "vote") {
@@ -322,7 +324,6 @@ function getNodeColor(label) {
   } else if (
     label == "PIZZA" ||
     label == "Leo" ||
-    label == "LeoThread" ||
     label == "Holybread" ||
     label == "podping" ||
     label == "WOO"
