@@ -134,6 +134,9 @@ function getLabel(operation) {
 
     if (typeof app === "object" && Object.keys(app).includes("name")) {
       app = app.name;
+      if (app === "liketu") {
+        return "LikeTu";
+      }
     }
 
     if (
