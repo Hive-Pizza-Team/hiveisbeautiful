@@ -279,7 +279,9 @@ function getLabel(operation) {
       return "3Speak";
     } else if (id.startsWith("leo_")) {
       return "Leo";
-    }else {
+    } else if (id.startsWith("cc_")) {
+      return "Crystal";
+    } else {
       return "Other";
     }
   } else if (opname == "vote") {
