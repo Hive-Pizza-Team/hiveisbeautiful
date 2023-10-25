@@ -144,8 +144,8 @@ function getLabel(operation) {
         typeof app === "string" &&
         (app.includes("steemmonsters") || app.includes("splinterlands"))) ||
       id.startsWith("sm_") ||
-      id.startsWith("pm_") || 
-      id.startsWith("sl-") || 
+      id.startsWith("pm_") ||
+      id.startsWith("sl-") ||
       id.startsWith("dev-sm_")
     ) {
       return "SL";
@@ -167,6 +167,14 @@ function getLabel(operation) {
         return "HashKings";
       } else if (json.contractPayload["symbol"] == "CROP") {
         return "dCrops";
+      } else if (json.contractPayload["symbol"] == "ZING") {
+        return "Holozing";
+      }
+    }
+
+    if (id.startsWith("ssc-mainnet") && Array.isArray(json) && json[0].contractPayload) {
+      if (json[0].contractPayload["symbol"] == "ZING") {
+        return "Holozing";
       }
     }
 
@@ -341,6 +349,8 @@ function getNodeColor(label) {
     label == "Ragnarok"
   ) {
     return "bluegreen";
+  } else if (label == "Holozing") {
+    return "purple";
   } else {
     return "gray";
   }
