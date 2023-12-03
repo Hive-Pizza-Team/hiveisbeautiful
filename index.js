@@ -8,6 +8,9 @@ function clamp(num, min, max) {
   return num <= min ? min : num >= max ? max : num;
 }
 
+const plusOrMinus = () => { return Math.random() < 0.5 ? -1 : 1};
+const randomOffset = (num) => { return num * plusOrMinus() * Math.random() }
+
 function updateData(nodes) {
   var u = d3.select("svg#viz").selectAll("g").data(nodes);
 
@@ -22,7 +25,7 @@ function updateData(nodes) {
         })
         .attr("r", function (d) {
           return d.radius;
-        });
+        })
 
       d3.select(this)
         .append("text")
@@ -70,6 +73,8 @@ function createNodes(transactions) {
         label: label,
         color: color,
         account: account,
+        x: width/2 + randomOffset(100),
+        y: height/2 + randomOffset(100),
       });
     });
   });
@@ -414,17 +419,17 @@ document.querySelector("button#fastforward").onclick = (e) => {
   }
 
   // update UI
-  document.querySelector("button#speedgauge").data = `${newSpeed}`;
-  document.querySelector("button#speedgauge").innerText = `${newSpeed}x`;
+  document.querySelector("span#speedgauge").data = `${newSpeed}`;
+  document.querySelector("span#speedgauge").innerText = `${newSpeed}x`;
 };
 
 function getSpeedSetting() {
-  if (!document.querySelector("button#speedgauge").data) {
-    document.querySelector("button#speedgauge").data = "1.0";
+  if (!document.querySelector("span#speedgauge").data) {
+    document.querySelector("span#speedgauge").data = "1.0";
   }
 
   var currentSpeed = parseFloat(
-    document.querySelector("button#speedgauge").data
+    document.querySelector("span#speedgauge").data
   );
   return currentSpeed;
 }
@@ -499,7 +504,7 @@ function runLoop() {
         })
       )
       .on("tick", ticked)
-      .alpha(50);
+      .alpha(10);
 
     block.transactions.forEach((tx) => {
       tx.operations.forEach((op) => {

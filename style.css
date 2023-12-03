@@ -1,17 +1,18 @@
-.fa-hive {
-    color: #E31337;
+body {
+    background-color: #f0f0f8;
 }
-
+.fa-hive {
+    color: #e31337;
+}
 .stroke {
     stroke-width: 2px;
     stroke: #e7e7f1;
 }
-
 .blue {
     fill: #277da1ff;
 }
 .gray {
-    fill: #577590ff;
+    fill: #6c757d;
 }
 .bluegreen {
     fill: #4d908eff;
@@ -23,7 +24,7 @@
     fill: #f3722cff;
 }
 .red {
-    fill: #f94144ff;
+    fill: #e31337;
 }
 .yellow {
     fill: #f9c74fff;
