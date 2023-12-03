@@ -45,3 +45,9 @@ body {
     display: block;
     margin: auto;
 }
+
+#viz {
+    z-index: -1;
+    position: relative;
+    translate: 0px -200px;
+}

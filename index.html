@@ -16,19 +16,19 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-    	<div class="center"><h2><span class="badge"><i class="fab fa-hive"></i></span><span class="badge">Hive Block #<span id="blockNum">NaN</span></span></h2></div>
+    	<div class="col text-right"><h2><span class="badge"><i class="fab fa-hive"></i></span><span class="badge">Hive Block #<span id="blockNum">NaN</span></span></h2></div>
     </div>
     <div class="row">
-      <div class="center"><h6>Timestamp: </span><span class="label label-primary" id="timestamp">NaN</span></h6></div>
+      <div class="col text-right"><h6>Timestamp: </span><span class="label label-primary" id="timestamp">NaN</span></h6></div>
     </div>
     <div class="row">
-    	<div class="center"><h6>Witness: </span><span class="label label-primary" id="currentWitness">NaN</span></h6></div>
+    	<div class="col text-right"><h6>Witness: </span><span class="label label-primary" id="currentWitness">NaN</span></h6></div>
     </div>
     <div class="row">
-    	<div class="center"><h6>Block Size: </span><span class="label label-primary" id="blockSize">NaN</span></h6></div>
+    	<div class="col text-right"><h6>Block Size: </span><span class="label label-primary" id="blockSize">NaN</span></h6></div>
     </div>
     <div class="row">
-      <div class="center">
+      <div class="col text-right">
         <button class="btn btn-secondary btn-sm" id="pause"><i class="fas fa-pause"></i></button>
         <button class="btn btn-secondary btn-sm" id="play" hidden><i class="fas fa-play"></i></button>
         <button class="btn btn-secondary btn-sm" id="gotoblock"><i class="fas fa-search"></i></button>
@@ -36,9 +36,9 @@
         <span class="label label-primary" id="speedgauge" disabled>1x</span>
       </div>
     </div>
-    <hr>
+    <hr hidden>
     <div class="row">
-  	  <div id="content" class="center">
+  	  <div id="content" class="col">
   	    <svg id="viz" width="800" height="700" class="center">
   	    </svg>
       </div>
