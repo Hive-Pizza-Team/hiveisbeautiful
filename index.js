@@ -18,7 +18,7 @@ function updateData(nodes) {
       d3.select(this)
         .append("circle")
         .attr("class", function (d) {
-          return d.color;
+          return `${d.color} stroke`;
         })
         .attr("r", function (d) {
           return d.radius;
@@ -401,9 +401,9 @@ document.querySelector("button#play").onclick = (e) => {
 };
 
 document.querySelector("button#fastforward").onclick = (e) => {
-  var minSpeed = 1.0;
-  var maxSpeed = 3.0;
-  var speedIncrement = 1.0;
+  const minSpeed = 1.0;
+  const maxSpeed = 3.0;
+  const speedIncrement = 1.0;
 
   var currentSpeed = getSpeedSetting();
   if (currentSpeed == maxSpeed) {
@@ -499,7 +499,7 @@ function runLoop() {
         })
       )
       .on("tick", ticked)
-      .alpha(100);
+      .alpha(50);
 
     block.transactions.forEach((tx) => {
       tx.operations.forEach((op) => {
