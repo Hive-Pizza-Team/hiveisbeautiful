@@ -289,6 +289,8 @@ function getLabel(operation) {
       return "Leo";
     } else if (id.startsWith("cc_")) {
       return "Crystal";
+    } else if (id.startsWith("vsc.")) {
+      return "VSC";
     } else {
       return "Other";
     }
