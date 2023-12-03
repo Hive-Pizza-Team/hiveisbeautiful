@@ -1,12 +1,12 @@
 body {
-    background-color: #f0f0f8;
+    background-color: #e7e7f1;
 }
 .fa-hive {
     color: #e31337;
 }
 .stroke {
     stroke-width: 2px;
-    stroke: #e7e7f1;
+    stroke: #f0f0f8;
 }
 .blue {
     fill: #277da1ff;
@@ -49,5 +49,5 @@ body {
 #viz {
     z-index: -1;
     position: relative;
-    translate: 0px -200px;
+    translate: 0px -150px;
 }
