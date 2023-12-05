@@ -45,9 +45,17 @@ body {
     display: block;
     margin: auto;
 }
+.navyblue {
+    fill: #14345B;
+}
 
 #viz {
     z-index: -1;
     position: relative;
-    translate: 0px -150px;
+    translate: 0px -100px;
+}
+
+.form-check {
+    margin-left: 15px;
+    margin-right: auto;
 }

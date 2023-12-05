@@ -1,0 +1,287 @@
+{
+  "archmage": {
+    "appNames": [],
+    "customJsonPrefixes": ["archmage_"],
+    "hiveEngineSymbols": ["ARCHMAGE", "ARCHMAGEA", "ARCHMAGEB", "ARCHMAGEM"],
+    "color": "blue",
+    "label": "Archmage"
+  },
+
+  "Actifit": {
+    "appNames": ["actifit"],
+    "customJsonPrefixes": [],
+    "hiveEngineSymbols": [""],
+    "color": "red"
+  },
+  "beem": {
+    "appNames": ["beem"],
+    "color": "gray",
+    "label": "beem"
+  },
+  "CBM": {
+    "appNames": [],
+    "customJsonPrefixes": ["cbm_"],
+    "hiveEngineSymbols": [""],
+    "color": "lightgreen"
+  },
+  "Comment": {
+    "appNames": [],
+    "customJsonPrefixes": [],
+    "hiveEngineSymbols": [""],
+    "color": "yellow-orange"
+  },
+  "cryptoshots": {
+    "appNames": ["CS"],
+    "color": "blue",
+    "label": "CS"
+  },
+  "dcrops": {
+    "appNames": [],
+    "customJsonPrefixes": ["dcrops"],
+    "hiveEngineSymbols": [""],
+    "color": "lightgreen",
+    "label": "dCrops"
+  },
+  "dbuzz": {
+    "appNames": ["dBuzz"],
+    "color": "red",
+    "label": "dBuzz"
+  },
+  "dlux": {
+    "customJsonPrefixes": ["dlux_"],
+    "label": "DLUX",
+    "color": "lightgreen"
+  },
+  "downvote": {
+    "appNames": [],
+    "color": "red",
+    "customJsonPrefixes": [],
+    "hiveEngineSymbols": [""],
+    "label": "Downvote"
+  },
+  "ecency": {
+    "appNames": ["ecency"],
+    "color": "blue",
+    "label": "Ecency",
+    "customJsonPrefixes": ["ecency_"],
+    "hiveEngineSymbols": [""]
+  },
+  "engage": {
+    "appNames": ["engage"],
+    "color": "blue",
+    "label": "Engage"
+  },
+  "exode": {
+    "customJsonPrefixes": ["exode"],
+    "label": "Exode"
+  },
+  "golemoverlord": {
+    "appNames": [],
+    "color": "blue",
+    "customJsonPrefixes": ["go_"],
+    "label": "GolemO"
+  },
+  "gls": {
+    "appNames": [],
+    "color": "blue",
+    "customJsonPrefixes": ["gls-"],
+    "hiveEngineSymbols": [""],
+    "label": "GLS"
+  },
+  "hiveengine": {
+    "appNames": [],
+    "color": "red",
+    "customJsonPrefixes": ["ssc-mainnet", "scot_"],
+    "hiveEngineSymbols": [""],
+    "label": "H-E"
+  },
+  "hashkings": {
+    "app-names": [],
+    "color": "lightgreen",
+    "customJsonPrefixes": ["qwoyn_"],
+    "hiveEngineSymbols": ["BUDS", "BUDSX", "EXP"],
+    "label": "HashKings"
+  },
+  "Hive.blog": {
+    "appNames": ["hiveblog"],
+    "color": "yellow-orange",
+    "label": "hive.blog"
+  },
+  "hivetube": {
+    "color": "hotpink",
+    "customJsonPrefixes": ["pp_video"],
+    "label": "HiveTube"
+  },
+  "holozing": {
+    "app-names": [],
+    "color": "purple",
+    "custom-json-ids": [],
+    "hiveEngineSymbols": ["ZING"],
+    "label": "Holo"
+  },
+  "Holybread": {
+    "color": "yellow"
+  },
+  "inleo": {
+    "appNames": ["leothreads", "leofinance"],
+    "color": "yellow",
+    "customJsonPrefixes": ["leo_"],
+    "label": "INLEO",
+    "url": "https://inleo.io"
+  },
+  "lacolmena": {
+    "appNames": "la-colmena"
+  },
+  "lensy": {
+    "customJsonPrefixes": ["lensy_"],
+    "label": "Lensy"
+  },
+  "liketu": {
+    "appNames": ["liketu"],
+    "color": "bluegreen",
+    "label": "liketu",
+    "url": "https://www.liketu.com/"
+  },
+  "muterra": {
+    "color": "blue",
+    "customJsonPrefixes": ["mole-miner-"],
+    "label": "MuTerra"
+  },
+  "nftmart": {
+    "color": "orange",
+    "customJsonPrefixes": ["nftmart"],
+    "label": "NFTMart",
+    "url": "https://nftm.art"
+  },
+  "nftshowroom": {
+    "customJsonPrefixes": ["nftsr_"],
+    "label": "NTFSR"
+  },
+  "oceanplanet": {
+    "customJsonPrefixes": ["op_"],
+    "label": "OP"
+  },
+  "Other": {
+    "color": "gray"
+  },
+  "peakmonsters": {
+    "customJsonPrefixes": ["pm_"],
+    "label": "PKM",
+    "color": "orange"
+  },
+  "peakd": {
+    "appNames": ["peakd"],
+    "color": "lightgreen",
+    "customJsonPrefixes": ["peakd_", "beacon_custom_json"],
+    "label": "PeakD"
+  },
+  "piggericks": {
+    "color": "bluegreen",
+    "customJsonPrefixes": [
+      "pigs_expired/1",
+      "reject_order/1",
+      "game_request/1",
+      "pack_purchase/1",
+      "confirm_order/1",
+      "fulfill_pigs/1",
+      "end_game/1",
+      "gmreq_",
+      "start_game/1",
+      "game_rewards/1",
+      "pig_upgrade/1",
+      "fulfill_points/1"
+    ],
+    "label": "Piggies"
+  },
+  "PIZZA": {
+    "appNames": ["pizzabot"],
+    "color": "yellow",
+    "hiveEngineSymbols": ["PIZZA"],
+    "label": "PIZZA",
+    "url": "https://hive.pizza"
+  },
+  "Posh": {
+    "appNames": ["Poshtoken"],
+    "color": "yellow"
+  },
+  "Post": {
+    "color": "lightgreen"
+  },
+  "podping": {
+    "color": "yellow",
+    "customJsonPrefixes": ["pp_"],
+    "label": "podping"
+  },
+  "proofofbrain": {
+    "label": "PoB",
+    "color": "gray"
+  },
+  "ragnarok": {
+    "color": "bluegreen",
+    "customJsonPrefixes": ["duat_"],
+    "label": "Ragnarok"
+  },
+  "somee": {
+    "appNames": ["somee"],
+    "color": "red",
+    "label": "Somee"
+  },
+  "spk": {
+    "appNames": ["3speak"],
+    "color": "bluegreen",
+    "customJsonPrefixes": ["spkcc_", "3speak-"],
+    "hiveEngineSymbols": [""],
+    "label": "Spk"
+  },
+  "splinterlands": {
+    "appNames": ["steemmonsters", "splinterlands"],
+    "color": "green",
+    "customJsonPrefixes": ["sm_", "sl-", "dev-sm_"],
+    "label": "SL"
+  },
+  "splintertalk": {
+    "appNames": ["steemmonsters"],
+    "color": "green",
+    "label": "Splintertalk"
+  },
+  "STEMSocial": {
+    "color": "blue"
+  },
+  "terracore": {
+    "color": "orange",
+    "customJsonPrefixes": ["terracore_", "tm_"],
+    "label": "Terracore"
+  },
+  "Xfer": {
+    "color": "orange"
+  },
+  "travelfeed": {
+    "appNames": "travelfeed",
+    "color": "orange",
+    "label": "Travelfeed"
+  },
+  "Up": {
+    "color": "blue"
+  },
+  "vsc": {
+    "color": "blue",
+    "customJsonPrefixes": "vsc.",
+    "label": "VSC"
+  },
+  "vimm": {
+    "color": "orange",
+    "label": "VIMM"
+  },
+  "waivio": {
+    "appNames": ["waivio"],
+    "color": "gray",
+    "customJsonPrefixes": ["wobj_", "waivio_"],
+    "label": "Waivio"
+  },
+  "WOO": {
+    "color": "yellow",
+    "customJsonPrefixes": ["woo_"],
+    "hiveEngineSymbols": ["WOO", "WOOALPHA", "WOOSATURN", "WOORAVEN"],
+    "label": "WOO"
+  }
+}

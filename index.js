@@ -1,15 +1,20 @@
 // Created by peakd.com/@hivetrending
+import data from "./hive-dapps.json" assert { type: "json" };
 
-var width = 800,
-  height = 700;
-var speed = 3000;
+// global configuration
+const width = 800;
+const height = 700;
 
 function clamp(num, min, max) {
   return num <= min ? min : num >= max ? max : num;
 }
 
-const plusOrMinus = () => { return Math.random() < 0.5 ? -1 : 1};
-const randomOffset = (num) => { return num * plusOrMinus() * Math.random() }
+const plusOrMinus = () => {
+  return Math.random() < 0.5 ? -1 : 1;
+};
+const randomOffset = (num) => {
+  return num * plusOrMinus() * Math.random();
+};
 
 function updateData(nodes) {
   var u = d3.select("svg#viz").selectAll("g").data(nodes);
@@ -24,8 +29,8 @@ function updateData(nodes) {
           return `${d.color} stroke`;
         })
         .attr("r", function (d) {
-          return d.radius;
-        })
+          return clamp(d.label.length * 6.25, 20, 40);
+        });
 
       d3.select(this)
         .append("text")
@@ -35,17 +40,6 @@ function updateData(nodes) {
           return d.label;
         })
         .style("font-size", "17px");
-
-      d3.select(this)
-        .append("text")
-        .attr("dy", "12px")
-        .attr("dominant-baseline", "central")
-        .attr("text-anchor", "middle")
-        .text(function (d) {
-          return `@${d.account.substr(0, 7)}...`;
-        })
-        .style("font-size", "10px")
-        .attr("hidden", "true");
     });
 
   u.exit().remove();
@@ -58,256 +52,294 @@ function ticked() {
   });
 }
 
+function handleComment(op) {
+  const appId = findAppId(op);
+  var label = getLabel(op);
+
+  var color;
+  if (appId) {
+    color = getNodeColor(appId);
+  } else {
+    color = getNodeColor(label);
+  }
+
+  return [
+    {
+      label: label,
+      color: color,
+      x: width / 2 + randomOffset(100),
+      y: height / 2 + randomOffset(100),
+    },
+  ];
+}
+
+function handleHiveEngineOps(op) {
+  var nodes = [];
+  var json = op[1].json;
+
+  try {
+    json = JSON.parse(json);
+  } catch (err) {
+    console.warn("Invalid JSON:", err);
+    return [];
+  }
+
+  if (!json) {
+    return nodes;
+  }
+
+  if (Array.isArray(json)) {
+    for (const heOp of json) {
+
+      const appId = findAppIdFromHESymbol(heOp.contractPayload.symbol);
+
+      if (!appId) {
+        continue;
+      }
+
+      const label = getNodeLabel(appId);
+      const color = getNodeColor(appId);
+
+      nodes.push({
+        label: label,
+        color: color,
+        x: width / 2 + randomOffset(100),
+        y: height / 2 + randomOffset(100),
+      });
+    }
+  } else if (json.contractPayload) {
+
+    const symbol = json.contractPayload.symbol;
+    const appId = findAppIdFromHESymbol(symbol);
+
+    if (!appId) {
+      return nodes;
+    }
+
+    const label = getNodeLabel(appId);
+    const color = getNodeColor(appId);
+
+    console.debug(appId, label, color);
+
+    nodes.push({
+      label: label,
+      color: color,
+      x: width / 2 + randomOffset(100),
+      y: height / 2 + randomOffset(100),
+    });
+  }
+
+  return nodes;
+}
+
+function handleCustomJson(op) {
+  var nodes = [];
+  // Hive-Engine tokens
+  var id = op[1].id;
+  if (id.startsWith("ssc-mainnet")) {
+    nodes = nodes.concat(handleHiveEngineOps(op));
+  }
+
+  const appId = findAppId(op);
+  var label = getLabel(op);
+  if (!label) {
+    console.error("missing label for:", appId);
+  }
+
+  var color;
+  if (appId) {
+    color = getNodeColor(appId);
+  } else {
+    color = getNodeColor(label);
+  }
+
+  nodes.push({
+    label: label,
+    color: color,
+    x: width / 2 + randomOffset(100),
+    y: height / 2 + randomOffset(100),
+  });
+
+  return nodes;
+}
+
+function handleGeneric(op) {
+  const appId = findAppId(op);
+  var label = getLabel(op);
+
+  var color;
+  if (appId) {
+    color = getNodeColor(appId);
+  } else {
+    color = getNodeColor(label);
+  }
+
+  return [
+    {
+      label: label,
+      color: color,
+      x: width / 2 + randomOffset(100),
+      y: height / 2 + randomOffset(100),
+    },
+  ];
+}
+
 function createNodes(transactions) {
   var nodes = [];
 
   transactions.forEach((tx) => {
     tx.operations.forEach((op) => {
-      var label = getLabel(op);
-      var color = getNodeColor(label);
-      var radius = clamp(label.length * 6.25, 30, 42);
-      var account = getAccount(op);
+      const opname = op[0];
+      var nodesThisOp = [];
+      if (opname === "comment") {
+        nodesThisOp = handleComment(op);
+      } else if (opname === "custom_json") {
+        nodesThisOp = handleCustomJson(op);
+      } else {
+        nodesThisOp = handleGeneric(op);
+      }
 
-      nodes.push({
-        radius: radius,
-        label: label,
-        color: color,
-        account: account,
-        x: width/2 + randomOffset(100),
-        y: height/2 + randomOffset(100),
-      });
+      nodes = nodes.concat(nodesThisOp);
     });
   });
   return nodes;
 }
 
+function findAppIdFromHESymbol(symbol) {
+  for (const [appId, appData] of Object.entries(data)) {
+    if (appData.hiveEngineSymbols) {
+      if (appData.hiveEngineSymbols.includes(symbol)) {
+        console.debug("from HE symbol appId", appId);
+        return appId;
+      }
+    }
+  }
+}
+
+function findAppId(operation) {
+  const opname = operation[0];
+
+  var json = operation[1].json_metadata;
+  if (json) {
+    var json = JSON.parse(json);
+  }
+
+  if (json && json.app) {
+    var app = json.app;
+
+    if (typeof app === "string") {
+      app = app.split("/")[0];
+      app = app.split("-mobile-")[0]; // liketu-mobile-1.0.0-2d3f547
+    } else if (app.name) {
+      app = app.name;
+    }
+  }
+  if (app) {
+    console.debug("JSON app name", app);
+  }
+
+  if (app) {
+    for (const [appId, appData] of Object.entries(data)) {
+      if (appData.appNames) {
+        for (const appName of appData.appNames) {
+          if (appName.startsWith(app.toLowerCase())) {
+            console.debug("appId", appId);
+            return appId;
+          }
+        }
+      }
+    }
+    console.warn("Did not find app in registry: ", app);
+  }
+
+  if (opname == "custom_json") {
+    var id = operation[1].id;
+
+    for (const [appId, app] of Object.entries(data)) {
+      if (app.customJsonPrefixes) {
+        for (const prefix of app.customJsonPrefixes) {
+          if (id.startsWith(prefix)) {
+            console.debug("appId", appId);
+            return appId;
+          }
+        }
+      }
+    }
+  }
+  return null;
+}
+
 function getLabel(operation) {
   var opname = operation[0];
 
-  if (opname == "comment" || opname == "post") {
-    var json = operation[1].json_metadata;
-    if (json) {
-      var json = JSON.parse(json);
+  if (opname == "comment") {
+    const appId = findAppId(operation);
+    if (appId && !Object.keys(data[appId]).includes("label")) {
+      console.log(appId, "missing label");
     }
-
-    if (json && json.app) {
-      var app = json.app;
-
-      if (typeof app === "string") {
-        app = app.split("/")[0];
-      } else if (app.name) {
-        app = app.name;
-      } else {
-        app = "Unrecognized";
-      }
-
-      if (app == "leofinance" || app == "LeoFinance") {
-        label = "Leo";
-      } else if (app == "peakd") {
-        label = "PeakD";
-      } else if (app == "hiveblog") {
-        label = "Hive.blog";
-      } else if (app.includes("Poshtoken")) {
-        label = "Posh";
-      } else if (app == "3speak") {
-        label = "3Speak";
-      } else if (app == "leothreads") {
-        label = "Leo";
-      } else {
-        label = app.substring(0, 9);
-        label = label.charAt(0).toUpperCase() + label.slice(1);
-      }
-
-      return label;
+    if (appId && data[appId].label) {
+      return data[appId].label;
     } else {
-      var label = opname;
-      label = label.charAt(0).toUpperCase() + label.slice(1);
-      return label;
+      return opname.charAt(0).toUpperCase() + opname.slice(1);
     }
   } else if (opname == "custom_json") {
     var id = operation[1].id;
 
     var json = operation[1].json;
-    var json = JSON.parse(json);
 
-    if (id == "" && json.prevServerSeed) {
-      return "EpicDice";
-    }
-
-    // Splinterlands related ops
     var app = json.app;
-
     if (typeof app === "object" && Object.keys(app).includes("name")) {
       app = app.name;
-      if (app === "liketu") {
-        return "LikeTu";
+    }
+
+    if (app) {
+      for (const appData of Object.values(data)) {
+        if (appData.appNames) {
+          for (const appName of appData.appNames) {
+            if (appName.startsWith(app)) {
+              console.debug("Labeled by app name:", appData.label);
+              return appData.label;
+            }
+          }
+        }
       }
     }
 
-    if (
-      (app &&
-        typeof app === "string" &&
-        (app.includes("steemmonsters") || app.includes("splinterlands"))) ||
-      id.startsWith("sm_") ||
-      id.startsWith("pm_") ||
-      id.startsWith("sl-") ||
-      id.startsWith("dev-sm_")
-    ) {
-      return "SL";
-    }
-
-    // Hive-Engine tokens
-    if (id.startsWith("ssc-mainnet") && json.contractPayload) {
-      if (json.contractPayload["symbol"] == "PIZZA") {
-        return "PIZZA";
-      } else if (
-        ["WOO", "WOOALPHA", "WOOSATURN", "WOORAVEN"].includes(
-          json.contractPayload["symbol"]
-        )
-      ) {
-        return "WOO";
-      } else if (
-        ["BUDS", "BUDSX", "EXP"].includes(json.contractPayload["symbol"])
-      ) {
-        return "HashKings";
-      } else if (json.contractPayload["symbol"] == "CROP") {
-        return "dCrops";
-      } else if (json.contractPayload["symbol"] == "ZING") {
-        return "Holozing";
+    for (const appData of Object.values(data)) {
+      if (appData.customJsonPrefixes) {
+        for (const prefix of appData.customJsonPrefixes) {
+          if (id.startsWith(prefix)) {
+            return appData.label;
+          }
+        }
       }
     }
 
-    if (id.startsWith("ssc-mainnet") && Array.isArray(json) && json[0].contractPayload) {
-      if (json[0].contractPayload["symbol"] == "ZING") {
-        return "Holozing";
-      }
-    }
-
-    if (id.includes("cbm_")) {
-      return "CBM";
-    } else if (id.startsWith("ssc-mainnet") || id.startsWith("scot_")) {
-      return "H-E";
-    } else if (
-      id == "pigs_expired/1" ||
-      id == "reject_order/1" ||
-      id == "game_request/1" ||
-      id == "pack_purchase/1" ||
-      id == "confirm_order/1" ||
-      id == "fulfill_pigs/1" ||
-      id == "end_game/1" ||
-      id.startsWith("gmreq_") ||
-      id == "start_game/1" ||
-      id == "game_rewards/1" ||
-      id == "pig_upgrade/1" ||
-      id == "fulfill_points/1"
-    ) {
-      return "Piggies";
-    } else if (id.startsWith("exode")) {
-      return "Exode";
-    } else if (id.startsWith("hb_")) {
-      return "Holybread";
-    } else if (id == "GameSeed") {
-      return "KryptoG";
-    } else if (id == "notify") {
+    if (id == "notify") {
       return "Notify";
     } else if (id == "follow") {
       return "Follow";
     } else if (id == "reblog") {
       return "Reblog";
-    } else if (id.startsWith("dlux_")) {
-      return "Dlux";
     } else if (id == "community") {
       return "Community";
-    } else if (id.startsWith("esteem_")) {
-      return "Ecency";
-    } else if (id == "rabona") {
-      return "Rabona";
-    } else if (id == "sensorlog") {
-      return "Kinoko";
-    } else if (id == "actifit") {
-      return "Actifit";
-    } else if (id.startsWith("dcity")) {
-      return "dCity";
-    } else if (id.startsWith("lensy_")) {
-      return "Lensy";
-    } else if (id == "beacon_custom_json") {
-      return "PeakD";
-    } else if (id.startsWith("nftsr_")) {
-      return "NFTSR";
-    } else if (id.startsWith("dominuus_")) {
-      return "Dominuus";
-    } else if (id == "nextcolony") {
-      return "NextColony";
-    } else if (id == "drugwars" || id.startsWith("dw-")) {
-      return "DrugWars";
-    } else if (id == "leoinfra") {
-      return "Leo";
-    } else if (id.startsWith("qwoyn_")) {
-      return "HashKings";
-    } else if (id == "dope") {
-      return "Dope";
-    } else if (id == "commentcoin") {
-      return "commentcoin";
-    } else if (
-      id.startsWith("pp_video") &&
-      Object.keys(json).includes("generator") &&
-      json.generator.includes("Hive-Tube")
-    ) {
-      return "HiveTube";
-    } else if (id.startsWith("pp_")) {
-      return "podping";
-    } else if (id.startsWith("ssc-testnet-")) {
-      return "H-E Testnet";
-    } else if (id == "dcrops") {
-      return "dCrops";
-    } else if (id.startsWith("ecency_")) {
-      return "Ecency";
-    } else if (id.startsWith("spkcc_")) {
-      return "SpkCC";
-    } else if (id.startsWith("duat_")) {
-      return "Ragnarok";
-    } else if (id.startsWith("op_")) {
-      return "OP";
-    } else if (id.startsWith("woo_")) {
-      return "WOO";
-    } else if (id.includes("archmage_")) {
-      return "Mage";
-    } else if (id.startsWith("gls-")) {
-      return "GLS";
-    } else if (id.startsWith("sf_")) {
-      return "Forge";
     } else if (id === "rc") {
       return "RC";
-    } else if (id.startsWith("terracore_") || id.startsWith("tm_")) {
-      return "Terracore";
-    } else if (id.startsWith("peakd_")) {
-      return "PeakD";
-    } else if (id === "nftmart") {
-      return "NFTMart";
-    } else if (id.startsWith("mole-miner-")) {
-      return "MuTerra";
-    } else if (id.startsWith("go_")) {
-      return "GolemO";
-    } else if (id.startsWith("3speak-")) {
-      return "3Speak";
-    } else if (id.startsWith("leo_")) {
-      return "Leo";
-    } else if (id.startsWith("cc_")) {
-      return "Crystal";
-    } else if (id.startsWith("vsc.")) {
-      return "VSC";
     } else {
+      console.warn("Unrecognized CustomJSON id:", id);
       return "Other";
     }
   } else if (opname == "vote") {
     if (operation[1].weight > 0) {
       return "Up";
     } else {
-      return "Downvote";
+    return "Down";
     }
+  } else if (opname == "transfer") {
+    return "Xfer"
   } else {
     // shorten the label
-    label = operation[0].split("_")[0];
+    var label = operation[0].split("_")[0];
     // capitalize first letter
     label = label.charAt(0).toUpperCase() + label.slice(1);
     label = label.substring(0, 9);
@@ -317,76 +349,32 @@ function getLabel(operation) {
 
 // Set node colors based on label strings
 
-function getNodeColor(label) {
-  if (label == "SL") {
-    return "green";
-  } else if (label == "Up" || label == "STEMSocia" || label == "Ecency") {
-    return "blue";
-  } else if (label == "Downvote" || label == "H-E" || label == "Actifit") {
-    return "red";
-  } else if (label === "HiveTube") {
-    return "hotpink";
-  } else if (label == "Other") {
-    return "gray";
-  } else if (
-    label == "Post" ||
-    label == "PeakD" ||
-    label == "dCrops" ||
-    label == "HashKings"
-  ) {
-    return "lightgreen";
-  } else if (label == "Comment" || label == "Hive.blog") {
-    return "yellow-orange";
-  } else if (label == "Transfer" || label == "VIMM" || label == "Terracore") {
-    return "orange";
-  } else if (label == "CBM") {
-    return "lightgreen";
-  } else if (
-    label == "PIZZA" ||
-    label == "Leo" ||
-    label == "Holybread" ||
-    label == "podping" ||
-    label == "WOO"
-  ) {
-    return "yellow";
-  } else if (
-    label == "Piggies" ||
-    label == "3Speak" ||
-    label == "SpkCC" ||
-    label == "Ragnarok"
-  ) {
-    return "bluegreen";
-  } else if (label == "Holozing") {
-    return "purple";
+function getNodeLabel(appId) {
+  if (Object.keys(data).includes(appId) && data[appId].label) {
+    return data[appId].label;
   } else {
-    return "gray";
+    console.warn("Label not found for: ", appId);
+    return "Other";
   }
 }
 
-function getAccount(operation) {
-  var opname = operation[0];
-
-  if (opname == "vote") {
-    var voter = operation[1].voter;
-    return voter;
-  } else if (opname == "custom_json") {
-    var account = `${operation[1].required_posting_auths}`;
-    return account;
+function getNodeColor(appId) {
+  if (Object.keys(data).includes(appId) && data[appId].color) {
+    return data[appId].color;
   } else {
-    return "account";
+    return "gray";
   }
 }
 
 // Start button controls
-
-document.querySelector("button#gotoblock").onclick = (e) => {
+function gotoblock() {
   var blockNum = prompt(
     "Enter block number:",
     document.querySelector("#blockNum").innerText
   );
 
   // sanitize
-  blockNum = parseInt(blockNum);
+  blockNum = parseInt(blockNum) - 1;
 
   if (!blockNum || blockNum < 0) {
     getLatestBlocknum();
@@ -394,33 +382,56 @@ document.querySelector("button#gotoblock").onclick = (e) => {
     document.querySelector("#blockNum").data = `${blockNum + 1}`;
     document.querySelector("#blockNum").innerText = `${blockNum}`;
   }
+  runLoop();
+}
+
+document.querySelector("button#gotoblock").onclick = (e) => {
+  gotoblock();
 };
+
+function pauseSimulation(pause) {
+  if (document.querySelector("button#play").hidden) {
+    document.querySelector("button#pause").hidden = true;
+    document.querySelector("button#play").hidden = false;
+  } else {
+    document.querySelector("button#play").hidden = true;
+    document.querySelector("button#pause").hidden = false;
+  }
+}
 
 document.querySelector("button#pause").onclick = (e) => {
-  document.querySelector("button#pause").hidden = true;
-  document.querySelector("button#play").hidden = false;
+  pauseSimulation();
 };
 document.querySelector("button#play").onclick = (e) => {
-  document.querySelector("button#play").hidden = true;
-  document.querySelector("button#pause").hidden = false;
+  pauseSimulation();
 };
 
-document.querySelector("button#fastforward").onclick = (e) => {
-  const minSpeed = 1.0;
+function toggleSpeed(up) {
+  const minSpeed = -3.0;
   const maxSpeed = 3.0;
   const speedIncrement = 1.0;
 
-  var currentSpeed = getSpeedSetting();
-  if (currentSpeed == maxSpeed) {
-    var newSpeed = minSpeed;
-  } else {
+  const currentSpeed = getSpeedSetting();
+
+  if (up) {
     var newSpeed = currentSpeed + speedIncrement;
-    newSpeed = clamp(newSpeed, minSpeed, maxSpeed);
+  } else {
+    var newSpeed = currentSpeed - speedIncrement;
   }
+
+  newSpeed = clamp(newSpeed, minSpeed, maxSpeed);
 
   // update UI
   document.querySelector("span#speedgauge").data = `${newSpeed}`;
   document.querySelector("span#speedgauge").innerText = `${newSpeed}x`;
+}
+
+document.querySelector("button#fastforward").onclick = (e) => {
+  toggleSpeed(true);
+};
+
+document.querySelector("button#backward").onclick = (e) => {
+  toggleSpeed(false);
 };
 
 function getSpeedSetting() {
@@ -428,9 +439,7 @@ function getSpeedSetting() {
     document.querySelector("span#speedgauge").data = "1.0";
   }
 
-  var currentSpeed = parseFloat(
-    document.querySelector("span#speedgauge").data
-  );
+  var currentSpeed = parseFloat(document.querySelector("span#speedgauge").data);
   return currentSpeed;
 }
 
@@ -442,7 +451,7 @@ function getLatestBlocknum() {
   // Get the current blocknum
   hive.api.getDynamicGlobalProperties(function (err, result) {
     if (err) {
-      console.log(err);
+      console.error(err);
       return;
     }
 
@@ -458,23 +467,17 @@ function getLatestBlocknum() {
 }
 
 function runLoop() {
-  if (document.querySelector("button#pause").hidden == true) {
-    return;
-  }
-
   var blockNum = document.querySelector("#blockNum").data;
   if (!blockNum) {
-    console.log("Failed to find block");
+    console.debug("Failed to find block");
     return;
   }
-
-  console.log(blockNum);
 
   hive.api.getBlock(blockNum, function (err, result) {
     //console.log(err, result);
     //console.log(blockNum)
     if (err) {
-      console.log(err);
+      console.error(err);
       return;
     }
 
@@ -495,12 +498,11 @@ function runLoop() {
 
     var simulation = d3
       .forceSimulation(nodes)
-      .force("charge", d3.forceManyBody().strength(0.1))
       .force("center", d3.forceCenter(width / 2, height / 2))
       .force(
         "collision",
         d3.forceCollide().radius(function (d) {
-          return d.radius * 1.0;
+          return clamp(d.label.length * 6.25, 20, 40);
         })
       )
       .on("tick", ticked)
@@ -510,8 +512,7 @@ function runLoop() {
       tx.operations.forEach((op) => {
         if (op[0] === "custom_json") {
           if (getLabel(op) == "Other") {
-            console.log("Unknown app");
-            console.log(op);
+            console.warn("Unknown app", JSON.stringify(op));
           }
         }
       });
@@ -525,6 +526,8 @@ function runLoop() {
       document.querySelector("#timestamp").innerText = `${block.timestamp}`;
     }
   });
+
+  console.info("Parsed block number:", blockNum);
 }
 
 // initialize, read params
@@ -546,13 +549,48 @@ if (urlParams.has("block")) {
 
 // repeat every N ms
 function runtimeAdjustSpeed() {
-  var currentSpeed = 3000 / getSpeedSetting();
+  var currentSpeed = Math.abs(3000 / getSpeedSetting());
 
-  runLoop();
+  if (document.querySelector("button#pause").hidden != true) {
+    runLoop();
+  }
 
-  setTimeout(() => {
-    runtimeAdjustSpeed();
-  }, currentSpeed);
+  if (currentSpeed != Infinity) {
+    setTimeout(() => {
+      runtimeAdjustSpeed();
+    }, currentSpeed);
+  }
 }
 
 runtimeAdjustSpeed();
+
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+  e = e || window.event;
+
+  if (e.keyCode == "38") {
+    // up arrow
+  } else if (e.keyCode == "40") {
+    // down arrow
+  } else if (e.keyCode == "37") {
+    // left arrow
+    toggleSpeed(false);
+  } else if (e.keyCode == "39") {
+    // right arrow
+    toggleSpeed(true);
+  } else if (e.keyCode == "32") {
+    // spacebar
+    pauseSimulation();
+  } else if (e.keyCode == "83") {
+    // s
+    gotoblock();
+  }
+}
+
+// override default space key handler
+window.addEventListener("keydown", function (e) {
+  if (e.keyCode == 32 && e.target == document.body) {
+    e.preventDefault();
+  }
+});
