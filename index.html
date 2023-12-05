@@ -18,38 +18,38 @@
 <body>
   <div class="container-fluid">
     <div class="row">
+      <div class="col-md-6">
+        <div id="controls" class="row mt-2 ml-0">
+          <button class="btn btn-secondary btn-lg" id="pause"><i class="fas fa-pause"></i></button>
+          <button class="btn btn-secondary btn-lg" id="play" hidden><i class="fas fa-play"></i></button>
+          <button class="btn btn-secondary btn-lg" id="gotoblock"><i class="fas fa-search"></i></button>
+          <button class="btn btn-secondary btn-lg" id="backward"><i class="fas fa-fast-backward"></i></button>
+          <button class="btn btn-secondary btn-lg" id="fastforward"><i class="fas fa-fast-forward"></i></button>
+          <button class="btn btn-light btn-lg" id="speedgauge" disabled>1x</button>
+        </div>
+        <div class="row">
+          <div class="col form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckCustomJSONs" checked disabled>
+            <label class="form-check-label" for="flexCheckCustomJSONs">
+              Show Custom JSONs
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row"><div class="col text-right"><h2><span class="badge"><i class="fab fa-hive"></i></span><span class="badge">Hive Block #<span id="blockNum">NaN</span></span></h2></div></div>
+        <div class="row text-right"><div class="col text-right"><h6>Timestamp: </span><span class="label label-primary" id="timestamp">NaN</span></h6></div></div>
+        <div class="row text-right"><div class="col text-right"><h6>Block Size: </span><span class="label label-primary" id="blockSize">NaN</span></h6></div></div>
+        <div class="row text-right"><div class="col text-right"><h6>Witness: </span><span class="label label-primary" id="currentWitness">NaN</span></h6></div></div>
+      </div>
+    </div>
 
-      <div class="col-md-6 col-sm-6 text-left"><h4></h4></div>
-    	<div class="col-md-6 text-right"><h2><span class="badge"><i class="fab fa-hive"></i></span><span class="badge">Hive Block #<span id="blockNum">NaN</span></span></h2></div>
     </div>
     <div class="row">
-      <div class="col-md-6 col-sm-6 text-left">
-        <button class="btn btn-secondary btn-lg" id="pause"><i class="fas fa-pause"></i></button>
-        <button class="btn btn-secondary btn-lg" id="play" hidden><i class="fas fa-play"></i></button>
-        <button class="btn btn-secondary btn-lg" id="gotoblock"><i class="fas fa-search"></i></button>
-        <button class="btn btn-secondary btn-lg" id="backward"><i class="fas fa-fast-backward"></i></button>
-        <button class="btn btn-secondary btn-lg" id="fastforward"><i class="fas fa-fast-forward"></i></button>
-        <button class="btn btn-light btn-lg" id="speedgauge" disabled>1x</button>
-      </div>
-      <div class="col-md-6 col-sm-6 text-right"><h6>Timestamp: </span><span class="label label-primary" id="timestamp">NaN</span></h6></div>
+
     </div>
     <div class="row">
-      <div class="col-md-3 text-left form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckCustomJSONs" checked disabled>
-        <label class="form-check-label" for="flexCheckCustomJSONs">
-          Show Custom JSONs
-        </label>
-      </div>
-    	<div class="col-md-6 text-right"><h6>Block Size: </span><span class="label label-primary" id="blockSize">NaN</span></h6></div>
-    </div>
-    <div class="row">
-      <!-- <div class="col col-md-6 text-left form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckCustomJSONs" checked disabled>
-        <label class="form-check-label" for="flexCheckCustomJSONs">
-          Show Splinterlands Ops
-        </label>
-      </div> -->
-    	<div class="col col-md-12 text-right"><h6>Witness: </span><span class="label label-primary" id="currentWitness">NaN</span></h6></div>
+
     </div><div class="row">
       
     </div>
@@ -65,9 +65,9 @@
     <hr>
     <div class="row">
       
-     <div class="col-md-6">Every 3 seconds an immutable Hive block is forged. This page shows the contents of those blocks in real-time. <br><br>
-     Each immutable block is verified and linked to a chain of millions of older blocks. A blockchain.</div>
-     <div class="col-md-6 text-right">
+     <div class="col-md-5 ml-3 mr-auto"><p>Every 3 seconds an immutable Hive block is forged. This page shows the contents of those blocks in real-time. <br><br>
+     Each immutable block is verified and linked to a chain of millions of older blocks. A blockchain.</p></div>
+     <div class="col-md-6 mr-3 text-right">
       <b>Legend</b>
       <span class="badge badge-light">SL = Splinterlands</span>
       <span class="badge badge-light">H-E = HiveEngine</span>

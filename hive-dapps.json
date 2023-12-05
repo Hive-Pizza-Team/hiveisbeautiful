@@ -10,7 +10,7 @@
   "actifit": {
     "appNames": ["actifit"],
     "color": "red",
-    "customJsonPrefixes": [],
+    "customJsonPrefixes": ["actifit"],
     "hiveEngineSymbols": ["AFIT","AFITX"],
     "label": "Actifit"
   },
