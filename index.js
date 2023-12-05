@@ -446,7 +446,6 @@ function getSpeedSetting() {
 }
 
 // End button controls
-
 hive.api.setOptions({ url: "https://api.deathwing.me/" });
 
 function getLatestBlocknum() {
