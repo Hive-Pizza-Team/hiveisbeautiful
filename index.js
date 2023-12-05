@@ -3,7 +3,7 @@ import data from "./hive-dapps.json" assert { type: "json" };
 
 // global configuration
 const width = 800;
-const height = 700;
+const height = 600;
 
 function clamp(num, min, max) {
   return num <= min ? min : num >= max ? max : num;
@@ -410,7 +410,7 @@ document.querySelector("button#play").onclick = (e) => {
 
 function toggleSpeed(up) {
   const minSpeed = 1.0;
-  const maxSpeed = 3.0;
+  const maxSpeed = 10.0;
   const speedIncrement = 1.0;
 
   const currentSpeed = getSpeedSetting();
@@ -424,8 +424,8 @@ function toggleSpeed(up) {
   newSpeed = clamp(newSpeed, minSpeed, maxSpeed);
 
   // update UI
-  document.querySelector("span#speedgauge").data = `${newSpeed}`;
-  document.querySelector("span#speedgauge").innerText = `${newSpeed}x`;
+  document.querySelector("#speedgauge").data = `${newSpeed}`;
+  document.querySelector("#speedgauge").innerText = `${newSpeed}x`;
 }
 
 document.querySelector("button#fastforward").onclick = (e) => {
@@ -437,11 +437,11 @@ document.querySelector("button#backward").onclick = (e) => {
 };
 
 function getSpeedSetting() {
-  if (!document.querySelector("span#speedgauge").data) {
-    document.querySelector("span#speedgauge").data = "1.0";
+  if (!document.querySelector("#speedgauge").data) {
+    document.querySelector("#speedgauge").data = "1.0";
   }
 
-  var currentSpeed = parseFloat(document.querySelector("span#speedgauge").data);
+  var currentSpeed = parseFloat(document.querySelector("#speedgauge").data);
   return currentSpeed;
 }
 

@@ -11,7 +11,8 @@
     "appNames": ["actifit"],
     "color": "red",
     "customJsonPrefixes": [],
-    "hiveEngineSymbols": ["AFIT","AFITX"]
+    "hiveEngineSymbols": ["AFIT","AFITX"],
+    "label": "Actifit"
   },
   "beem": {
     "appNames": ["beem"],
@@ -43,7 +44,7 @@
     "label": "dCrops"
   },
   "dbuzz": {
-    "appNames": ["dBuzz"],
+    "appNames": ["dbuzz"],
     "color": "red",
     "label": "dBuzz"
   },
