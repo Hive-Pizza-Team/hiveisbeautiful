@@ -337,6 +337,8 @@ function getLabel(operation) {
     }
   } else if (opname == "transfer") {
     return "Xfer"
+  } else if (opname.startsWith("limit")) {
+    return "Market"
   } else {
     // shorten the label
     var label = operation[0].split("_")[0];
@@ -407,7 +409,7 @@ document.querySelector("button#play").onclick = (e) => {
 };
 
 function toggleSpeed(up) {
-  const minSpeed = -3.0;
+  const minSpeed = 1.0;
   const maxSpeed = 3.0;
   const speedIncrement = 1.0;
 
@@ -549,16 +551,21 @@ if (urlParams.has("block")) {
 
 // repeat every N ms
 function runtimeAdjustSpeed() {
-  var currentSpeed = Math.abs(3000 / getSpeedSetting());
 
-  if (document.querySelector("button#pause").hidden != true) {
+  if (document.querySelector("button#pause").hidden != true && getSpeedSetting() != 0) {
     runLoop();
   }
+
+  var currentSpeed = Math.abs(3000 / getSpeedSetting()); 
 
   if (currentSpeed != Infinity) {
     setTimeout(() => {
       runtimeAdjustSpeed();
     }, currentSpeed);
+  } else {
+    setTimeout(() => {
+      runtimeAdjustSpeed();
+    }, 1000);
   }
 }
 

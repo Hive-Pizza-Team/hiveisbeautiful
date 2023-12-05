@@ -7,11 +7,11 @@
     "label": "Archmage"
   },
 
-  "Actifit": {
+  "actifit": {
     "appNames": ["actifit"],
+    "color": "red",
     "customJsonPrefixes": [],
-    "hiveEngineSymbols": [""],
-    "color": "red"
+    "hiveEngineSymbols": ["AFIT","AFITX"]
   },
   "beem": {
     "appNames": ["beem"],
