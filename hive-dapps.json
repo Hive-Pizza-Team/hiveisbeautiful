@@ -15,9 +15,15 @@
     "label": "Actifit"
   },
   "beem": {
-    "appNames": ["beem"],
+    "appNames": ["beem", "beempy"],
     "color": "gray",
     "label": "beem"
+  },
+  "beerlover": {
+    "appNames": ["beerlover"],
+    "color": "orange",
+    "hiveEngineSymbols": ["BEER"],
+    "label": "Beer"
   },
   "CBM": {
     "appNames": [],
@@ -71,6 +77,11 @@
     "appNames": ["engage"],
     "color": "blue",
     "label": "Engage"
+  },
+  "enrave": {
+    "appNames": ["engrave"],
+    "color": "blue",
+    "label": "Engrave"
   },
   "exode": {
     "customJsonPrefixes": ["exode"],
@@ -140,6 +151,7 @@
   "liketu": {
     "appNames": ["liketu"],
     "color": "bluegreen",
+    "customJsonPrefixes": ["react"],
     "label": "liketu",
     "url": "https://www.liketu.com/"
   },
@@ -228,7 +240,7 @@
     "label": "Somee"
   },
   "spk": {
-    "appNames": ["3speak"],
+    "appNames": ["3speak","3SpeakComment"],
     "color": "bluegreen",
     "customJsonPrefixes": ["spkcc_", "3speak-"],
     "hiveEngineSymbols": [""],
@@ -260,6 +272,11 @@
     "appNames": "travelfeed",
     "color": "orange",
     "label": "Travelfeed"
+  },
+  "qurator": {
+    "appNames": ["Discord"],
+    "color": "blue",
+    "label": "Qurator"
   },
   "Up": {
     "color": "blue"

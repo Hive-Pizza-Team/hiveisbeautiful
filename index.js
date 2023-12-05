@@ -133,6 +133,10 @@ function handleHiveEngineOps(op) {
 }
 
 function handleCustomJson(op) {
+  if (document.querySelector("#flexCheckCustomJSONs").value) {
+    return [];
+  }
+
   var nodes = [];
   // Hive-Engine tokens
   var id = op[1].id;
@@ -406,6 +410,18 @@ document.querySelector("button#pause").onclick = (e) => {
 };
 document.querySelector("button#play").onclick = (e) => {
   pauseSimulation();
+};
+
+function hideCustomJsons() {
+  if (document.querySelector("#flexCheckCustomJSONs").value) {
+    document.querySelector("#flexCheckCustomJSONs").value = false;
+  } else {
+    document.querySelector("#flexCheckCustomJSONs").value = true;
+  }
+}
+
+document.querySelector("#flexCheckCustomJSONs").onclick = (e) => {
+  hideCustomJsons();
 };
 
 function toggleSpeed(up) {
