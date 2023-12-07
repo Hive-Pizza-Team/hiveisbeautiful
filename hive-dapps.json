@@ -70,7 +70,7 @@
     "appNames": ["ecency"],
     "color": "blue",
     "label": "Ecency",
-    "customJsonPrefixes": ["ecency_"],
+    "customJsonPrefixes": ["ecency_", "esteem_"],
     "hiveEngineSymbols": [""]
   },
   "engage": {
@@ -84,8 +84,14 @@
     "label": "Engrave"
   },
   "exode": {
+    "color": "blue",
     "customJsonPrefixes": ["exode"],
     "label": "Exode"
+  },
+  "exxp": {
+    "appNames": ["exxp"],
+    "color": "blue",
+    "label": "Exxp"
   },
   "golemoverlord": {
     "appNames": [],
@@ -214,7 +220,7 @@
     "url": "https://hive.pizza"
   },
   "Posh": {
-    "appNames": ["Poshtoken"],
+    "appNames": ["Poshtoken 0.0.1", "Poshtoken 0.0.2"],
     "color": "yellow"
   },
   "Post": {
@@ -227,6 +233,7 @@
   },
   "proofofbrain": {
     "label": "PoB",
+    "customJsonPrefixes": ["proofofbrain"],
     "color": "gray"
   },
   "ragnarok": {
@@ -246,6 +253,11 @@
     "hiveEngineSymbols": [""],
     "label": "Spk"
   },
+  "splinterboost": {
+    "appNames": ["splinterboost"],
+    "color": "green",
+    "label": "Splinterboost"
+  },
   "splinterlands": {
     "appNames": ["steemmonsters", "splinterlands"],
     "color": "green",
@@ -253,7 +265,7 @@
     "label": "SL"
   },
   "splintertalk": {
-    "appNames": ["steemmonsters"],
+    "appNames": ["splintertalk"],
     "color": "green",
     "label": "Splintertalk"
   },
@@ -277,6 +289,12 @@
     "appNames": ["Discord"],
     "color": "blue",
     "label": "Qurator"
+  },
+  "sportstalksocial": {
+    "appNames": ["sportstalksocial"],
+    "hiveEngineSymbols": ["SPORTS"],
+    "color": "blue",
+    "label": "Sportstalk"
   },
   "Up": {
     "color": "blue"
