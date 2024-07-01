@@ -14,6 +14,11 @@
     "hiveEngineSymbols": ["AFIT","AFITX"],
     "label": "Actifit"
   },
+
+  "arcadecolony": {
+    "customJsonPrefixes": ["ac-plat-"]
+  },
+
   "beem": {
     "appNames": ["beem", "beempy"],
     "color": "gray",
@@ -33,9 +38,9 @@
   },
   "Comment": {
     "appNames": [],
+    "color": "gray",
     "customJsonPrefixes": [],
-    "hiveEngineSymbols": [""],
-    "color": "yellow-orange"
+    "hiveEngineSymbols": [""]
   },
   "cryptoshots": {
     "appNames": ["CS"],
@@ -61,7 +66,7 @@
   },
   "downvote": {
     "appNames": [],
-    "color": "red",
+    "color": "gray",
     "customJsonPrefixes": [],
     "hiveEngineSymbols": [""],
     "label": "Downvote"
@@ -278,10 +283,10 @@
     "label": "Terracore"
   },
   "Xfer": {
-    "color": "orange"
+    "color": "gray"
   },
   "travelfeed": {
-    "appNames": "travelfeed",
+    "appNames": ["travelfeed"],
     "color": "orange",
     "label": "Travelfeed"
   },
@@ -297,7 +302,7 @@
     "label": "Sportstalk"
   },
   "Up": {
-    "color": "blue"
+    "color": "gray"
   },
   "vsc": {
     "color": "blue",
