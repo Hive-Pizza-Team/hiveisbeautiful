@@ -16,7 +16,9 @@
   },
 
   "arcadecolony": {
-    "customJsonPrefixes": ["ac-plat-"]
+    "color": "blue",
+    "customJsonPrefixes": ["ac-plat-"],
+    "label": "AC"
   },
 
   "beem": {
@@ -148,7 +150,7 @@
   "inleo": {
     "appNames": ["leothreads", "leofinance"],
     "color": "yellow",
-    "customJsonPrefixes": ["leo_"],
+    "customJsonPrefixes": ["leo_", "inleo_"],
     "label": "INLEO",
     "url": "https://inleo.io"
   },
@@ -223,6 +225,11 @@
     "hiveEngineSymbols": ["PIZZA"],
     "label": "PIZZA",
     "url": "https://hive.pizza"
+  },
+  "polls": {
+    "color": "lightgreen",
+    "customJsonPrefixes": ["polls"],
+    "label": "polls"
   },
   "Posh": {
     "appNames": ["Poshtoken 0.0.1", "Poshtoken 0.0.2"],
