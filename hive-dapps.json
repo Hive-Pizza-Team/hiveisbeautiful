@@ -68,6 +68,11 @@
     "color": "red",
     "label": "dBuzz"
   },
+  "distriator": {
+    "appNames": ["distriator"],
+    "color": "green",
+    "label": "Distriator"
+  },
   "dlux": {
     "customJsonPrefixes": ["dlux_"],
     "label": "DLUX",
@@ -265,6 +270,11 @@
     "customJsonPrefixes": ["duat_"],
     "label": "Ragnarok"
   },
+  "riseofthepixels": {
+    "color": "hotpink",
+    "customJsonPrefixes": ["riseofthepixels"],
+    "label": "RotP"
+  },
   "somee": {
     "appNames": ["somee"],
     "color": "red",
@@ -293,8 +303,10 @@
     "color": "green",
     "label": "Splintertalk"
   },
-  "STEMSocial": {
-    "color": "blue"
+  "stemsocial": {
+    "appNames": ["stemsocial"],
+    "color": "blue",
+    "label": "STEMSocial"
   },
   "terracore": {
     "color": "orange",
@@ -327,6 +339,11 @@
     "color": "blue",
     "customJsonPrefixes": "vsc.",
     "label": "VSC"
+  },
+  "v4v": {
+    "appNames": ["v4vapi"],
+    "color": "red",
+    "label": "V4V"
   },
   "vimm": {
     "color": "orange",
