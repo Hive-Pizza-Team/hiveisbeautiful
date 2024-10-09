@@ -17,7 +17,7 @@
 
   "arcadecolony": {
     "color": "blue",
-    "customJsonPrefixes": ["ac-plat-"],
+    "customJsonPrefixes": ["ac-"],
     "label": "AC"
   },
 
@@ -43,6 +43,13 @@
     "color": "gray",
     "customJsonPrefixes": [],
     "hiveEngineSymbols": [""]
+  },
+  "CommentRewarder": {
+    "appNames": ["CommentRewarder"],
+    "color": ["gold"],
+    "customJsonPrefixes": [],
+    "hiveEngineSymbols": [""],
+    "label": "CR"
   },
   "cryptoshots": {
     "appNames": ["CS"],
@@ -146,6 +153,11 @@
   },
   "Holybread": {
     "color": "yellow"
+  },
+  "immortalcreed": {
+    "color": "navyblue",
+    "customJsonPrefixes": ["ic_"],
+    "label": "IC"
   },
   "inleo": {
     "appNames": ["leothreads", "leofinance"],
@@ -323,7 +335,7 @@
   "waivio": {
     "appNames": ["waivio"],
     "color": "gray",
-    "customJsonPrefixes": ["wobj_", "waivio_"],
+    "customJsonPrefixes": ["wobj_", "waivio_", "follow_wobject"],
     "label": "Waivio"
   },
   "WOO": {

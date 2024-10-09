@@ -4,6 +4,10 @@ body {
 .fa-hive {
     color: #e31337;
 }
+.center {
+    display: block;
+    margin: auto;
+}
 .stroke {
     stroke-width: 2px;
     stroke: #f0f0f8;
@@ -11,26 +15,14 @@ body {
 .blue {
     fill: #277da1ff;
 }
-.gray {
-    fill: #6c757d;
-}
 .bluegreen {
     fill: #4d908eff;
 }
-.yellow-orange {
-    fill: #f8961eff;
+.gold {
+    fill: gold;
 }
-.orange {
-    fill: #f3722cff;
-}
-.red {
-    fill: #e31337;
-}
-.yellow {
-    fill: #f9c74fff;
-}
-.lightgreen {
-    fill: #90be6dff;
+.gray {
+    fill: #6c757d;
 }
 .green {
     fill: #43aa8bff;
@@ -38,16 +30,28 @@ body {
 .hotpink {
     fill: #ff69b4;
 }
-.purple {
-    fill: #9128e7;
-}
-.center {
-    display: block;
-    margin: auto;
+.lightgreen {
+    fill: #90be6dff;
 }
 .navyblue {
     fill: #14345B;
 }
+.orange {
+    fill: #f3722cff;
+}
+.purple {
+    fill: #9128e7;
+}
+.red {
+    fill: #e31337;
+}
+.yellow {
+    fill: #f9c74fff;
+}
+.yellow-orange {
+    fill: #f8961eff;
+}
+
 
 #viz {
     z-index: -1;

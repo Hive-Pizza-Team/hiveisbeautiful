@@ -54,7 +54,13 @@ function ticked() {
 
 function handleComment(op) {
   const appId = findAppId(op);
-  var label = getLabel(op);
+
+  var label = "";
+  if (appId) {
+    label = data[appId].label;
+  } else {
+    label = getLabel(op);
+  }
 
   var color;
   if (appId) {
@@ -90,7 +96,6 @@ function handleHiveEngineOps(op) {
 
   if (Array.isArray(json)) {
     for (const heOp of json) {
-
       const appId = findAppIdFromHESymbol(heOp.contractPayload.symbol);
 
       if (!appId) {
@@ -108,7 +113,6 @@ function handleHiveEngineOps(op) {
       });
     }
   } else if (json.contractPayload) {
-
     const symbol = json.contractPayload.symbol;
     const appId = findAppIdFromHESymbol(symbol);
 
@@ -133,7 +137,8 @@ function handleHiveEngineOps(op) {
 }
 
 function handleCustomJson(op) {
-  if (document.querySelector("#flexCheckCustomJSONs").value) {
+  if (document.querySelector("#flexCheckCustomJSONs").value == "true") {
+    console.error('Custom JSON hidden');
     return [];
   }
 
@@ -146,6 +151,7 @@ function handleCustomJson(op) {
 
   const appId = findAppId(op);
   var label = getLabel(op);
+
   if (!label) {
     console.error("missing label for:", appId);
   }
@@ -168,15 +174,8 @@ function handleCustomJson(op) {
 }
 
 function handleGeneric(op) {
-  const appId = findAppId(op);
-  var label = getLabel(op);
-
-  var color;
-  if (appId) {
-    color = getNodeColor(appId);
-  } else {
-    color = getNodeColor(label);
-  }
+  const label = getLabel(op);
+  const color = getNodeColor(label);
 
   return [
     {
@@ -282,8 +281,10 @@ function getLabel(operation) {
       console.log(appId, "missing label");
     }
     if (appId && data[appId].label) {
+      console.debug("app data", data[appId]);
       return data[appId].label;
     } else {
+      console.debug("Using opname as label");
       return opname.charAt(0).toUpperCase() + opname.slice(1);
     }
   } else if (opname == "custom_json") {
@@ -292,6 +293,10 @@ function getLabel(operation) {
     var json = operation[1].json;
 
     var app = json.app;
+    if (typeof app === "string") {
+      app = app.split("/")[0];
+      app = app.split("-mobile-")[0]; // liketu-mobile-1.0.0-2d3f547
+    }
     if (typeof app === "object" && Object.keys(app).includes("name")) {
       app = app.name;
     }
@@ -337,17 +342,19 @@ function getLabel(operation) {
     if (operation[1].weight > 0) {
       return "Up";
     } else {
-    return "Down";
+      return "Down";
     }
   } else if (opname == "transfer") {
-    return "Xfer"
+    return "Xfer";
   } else if (opname.startsWith("limit")) {
-    return "Market"
+    return "Market";
+  } else if (opname == "comment_options") {
+    return "Com Opts";
   } else {
     // shorten the label
     var label = operation[0].split("_")[0];
     // capitalize first letter
-    label = label.charAt(0).toUpperCase() + label.slice(1);
+    var label = label.charAt(0).toUpperCase() + label.slice(1);
     label = label.substring(0, 9);
     return label;
   }
@@ -510,6 +517,7 @@ function runLoop() {
     ).innerText = `${blockSize.toLocaleString()} transactions`;
 
     d3.select("svg#viz").selectAll("g").remove();
+
     var nodes = createNodes(block.transactions);
     updateData(nodes);
 
@@ -566,12 +574,14 @@ if (urlParams.has("block")) {
 
 // repeat every N ms
 function runtimeAdjustSpeed() {
-
-  if (document.querySelector("button#pause").hidden != true && getSpeedSetting() != 0) {
+  if (
+    document.querySelector("button#pause").hidden != true &&
+    getSpeedSetting() != 0
+  ) {
     runLoop();
   }
 
-  var currentSpeed = Math.abs(3000 / getSpeedSetting()); 
+  var currentSpeed = Math.abs(3000 / getSpeedSetting());
 
   if (currentSpeed != Infinity) {
     setTimeout(() => {
