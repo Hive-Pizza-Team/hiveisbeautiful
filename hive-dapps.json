@@ -149,6 +149,10 @@
     "customJsonPrefixes": ["pp_video"],
     "label": "HiveTube"
   },
+  "hivesnaps": {
+    "app-names": ["hivesnaps"],
+    "color": "blue"
+  },
   "holozing": {
     "app-names": [],
     "color": "purple",
@@ -184,6 +188,11 @@
     "customJsonPrefixes": ["react"],
     "label": "liketu",
     "url": "https://www.liketu.com/"
+  },
+  "magnetbank": {
+    "color": "yellow-orange",
+    "customJsonPrefixes": ["magnetbank"],
+    "label": "MagnetBank"
   },
   "muterra": {
     "color": "blue",
