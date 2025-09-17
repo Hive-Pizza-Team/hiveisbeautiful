@@ -1,12 +1,4 @@
 {
-  "archmage": {
-    "appNames": [],
-    "customJsonPrefixes": ["archmage_"],
-    "hiveEngineSymbols": ["ARCHMAGE", "ARCHMAGEA", "ARCHMAGEB", "ARCHMAGEM"],
-    "color": "blue",
-    "label": "Archmage"
-  },
-
   "actifit": {
     "appNames": ["actifit"],
     "color": "red",
@@ -14,13 +6,22 @@
     "hiveEngineSymbols": ["AFIT","AFITX"],
     "label": "Actifit"
   },
-
+  "archmage": {
+    "appNames": [],
+    "customJsonPrefixes": ["archmage_"],
+    "hiveEngineSymbols": ["ARCHMAGE", "ARCHMAGEA", "ARCHMAGEB", "ARCHMAGEM"],
+    "color": "blue",
+    "label": "Archmage"
+  },
   "arcadecolony": {
     "color": "blue",
     "customJsonPrefixes": ["ac-"],
     "label": "AC"
   },
-
+  "astralwars": {
+    "customJsonPrefixes": ["Astral Wars"],
+    "label": "AstralWars"
+  },
   "beem": {
     "appNames": ["beem", "beempy"],
     "color": "gray",
@@ -45,14 +46,14 @@
     "hiveEngineSymbols": [""]
   },
   "CommentRewarder": {
-    "appNames": ["CommentRewarder"],
+    "appNames": ["commentrewarder"],
     "color": ["gold"],
     "customJsonPrefixes": [],
     "hiveEngineSymbols": [""],
     "label": "CR"
   },
   "cryptoshots": {
-    "appNames": ["CS"],
+    "appNames": ["cs"],
     "color": "blue",
     "label": "CS"
   },
@@ -86,7 +87,7 @@
     "label": "Downvote"
   },
   "ecency": {
-    "appNames": ["ecency"],
+    "appNames": ["ecency", "ecency-waves"],
     "color": "blue",
     "label": "Ecency",
     "customJsonPrefixes": ["ecency_", "esteem_"],
@@ -133,35 +134,42 @@
     "label": "H-E"
   },
   "hashkings": {
-    "app-names": [],
+    "appNames": [],
     "color": "lightgreen",
     "customJsonPrefixes": ["qwoyn_"],
     "hiveEngineSymbols": ["BUDS", "BUDSX", "EXP"],
     "label": "HashKings"
   },
-  "Hive.blog": {
+  "hive.blog": {
     "appNames": ["hiveblog"],
     "color": "yellow-orange",
     "label": "hive.blog"
+  },
+  "hivediscomod": {
+    "appNames": ["hivediscomod"],
+    "label": "HiveDiscoMod"
+  },
+  "hivesnaps": {
+    "appNames": ["hivesnaps"],
+    "color": "blue",
+    "label": "Snapie"
   },
   "hivetube": {
     "color": "hotpink",
     "customJsonPrefixes": ["pp_video"],
     "label": "HiveTube"
   },
-  "hivesnaps": {
-    "app-names": ["hivesnaps"],
-    "color": "blue"
-  },
+  
   "holozing": {
-    "app-names": [],
+    "appNames": [],
     "color": "purple",
     "custom-json-ids": [],
     "hiveEngineSymbols": ["ZING"],
     "label": "Holo"
   },
   "Holybread": {
-    "color": "yellow"
+    "color": "yellow",
+    "label": "Holybread"
   },
   "immortalcreed": {
     "color": "navyblue",
@@ -191,7 +199,7 @@
   },
   "magnetbank": {
     "color": "yellow-orange",
-    "customJsonPrefixes": ["magnetbank"],
+    "customJsonPrefixes": ["MagnetBank","magnetbank"],
     "label": "MagnetBank"
   },
   "muterra": {
@@ -258,8 +266,9 @@
     "label": "polls"
   },
   "Posh": {
-    "appNames": ["Poshtoken 0.0.1", "Poshtoken 0.0.2"],
-    "color": "yellow"
+    "appNames": ["poshtoken 0.0.1", "poshtoken 0.0.2"],
+    "color": "yellow",
+    "label": "Posh"
   },
   "Post": {
     "color": "lightgreen"
@@ -289,8 +298,13 @@
     "color": "red",
     "label": "Somee"
   },
+  "skatehive": {
+    "appNames": ["skatehive app 3.0"],
+    "color": "green",
+    "label": "Skate"
+  },
   "spk": {
-    "appNames": ["3speak","3SpeakComment"],
+    "appNames": ["3speak","3speakcomment"],
     "color": "bluegreen",
     "customJsonPrefixes": ["spkcc_", "3speak-"],
     "hiveEngineSymbols": [""],
@@ -331,7 +345,7 @@
     "label": "Travelfeed"
   },
   "qurator": {
-    "appNames": ["Discord"],
+    "appNames": ["discord"],
     "color": "blue",
     "label": "Qurator"
   },
